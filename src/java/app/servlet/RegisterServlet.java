@@ -4,6 +4,7 @@ import app.dao.AccountDAO;
 import app.dao.RoleDAO;
 import app.entity.Account;
 import app.util.Constant;
+import app.util.ErrorMessage;
 import app.util.PasswordEncryption;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -19,33 +20,44 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "RegisterServlet", urlPatterns = {"/RegisterServlet"})
 public class RegisterServlet extends HttpServlet {
 
+//    private final String HOME_PAGE = "index.jsp";
     private final String LOGIN_PAGE = "login.jsp";
-    private final String REGISTER_PAGE = "register.jsp";
 
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String email = request.getParameter("email").trim();
         String password = request.getParameter("password").trim();
+        String confirmPassword = request.getParameter("confirmPassword").trim();
         String name = request.getParameter("name").trim();
+        ErrorMessage errorObj = new ErrorMessage();
         AccountDAO accountDAO = new AccountDAO();
         RoleDAO roleDAO = new RoleDAO();
+        
+        if (!confirmPassword.equals(password)) {
+            errorObj.setPasswordNotMatch(Constant.PASSWORD_NON_MATCH);
+        }
+        
+        if (accountDAO.isExistedAccount(email)) {
+            errorObj.setMailExisted(Constant.EMAIL_EXISTED);
+        }
 
         try {
-            if (!accountDAO.isExistedAccount(email)) {
+            if (!errorObj.hasError()) {
                 Account account = new Account(email, PasswordEncryption.encrypt(password), name);
                 account.setRole(roleDAO.getDefaultRole());
                 account.setStatus(Constant.DEFAULT_ACCOUNT_STATUS);
                 accountDAO.saveAccount(account);
-                response.sendRedirect(LOGIN_PAGE);
+                request.setAttribute("isSuccess", true);
+//                response.sendRedirect(HOME_PAGE);
             } else {
-                request.setAttribute("errorMessage", Constant.EMAIL_EXISTED);
-                request.setAttribute("email", email);
-                request.setAttribute("name", name);
-                request.getRequestDispatcher(REGISTER_PAGE).forward(request, response);
+                request.setAttribute("errorObj", errorObj);
+                request.setAttribute("registerEmail", email);
+                request.setAttribute("registerName", name);
             }
         } catch (NoSuchAlgorithmException | UnsupportedEncodingException error) {
             Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, error);
         }
 
+        request.getRequestDispatcher(LOGIN_PAGE).forward(request, response);
     }
 }
