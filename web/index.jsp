@@ -12,11 +12,12 @@
         <link
             href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;700&display=swap"
             rel="stylesheet"
-        />
+            />
         <!-- Nucleo Icons -->
         <title>Social Forum</title>
     </head>
     <body class="page">
+        <c:set var="aritcles" value="${sessionScope.articles}" />
         <!-- Navigation -->
         <nav class="navbar navbar-expand-lg bg-info">
             <div class="container">
@@ -30,7 +31,7 @@
                         aria-controls="navbarSupportedContent"
                         aria-expanded="false"
                         aria-label="Toggle navigation"
-                    >
+                        >
                         <span class="navbar-toggler-bar bar1"></span>
                         <span class="navbar-toggler-bar bar2"></span>
                         <span class="navbar-toggler-bar bar3"></span>
@@ -44,7 +45,7 @@
                                 type="search"
                                 value=""
                                 name="search"
-                            />
+                                />
                             <button class="btn btn-primary btn-round" name="action">Search</button>
                         </form>
                         <li class="nav-item active">
@@ -57,7 +58,7 @@
                                 data-toggle="dropdown"
                                 aria-haspopup="true"
                                 aria-expanded="false"
-                            >
+                                >
                                 <span>Victor</span>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -73,30 +74,33 @@
 
         <!-- Body -->
         <div class="container p-0">
-            <div class="header">
-                <h3 class="pt-5">Mới nhất</h3>
-            </div>
-            <div class="row pl-3">
-                <div class="col-6 mb-5">
-                    <div class="row news-item">
-                        <div class="col-4 px-0">
-                            <img src="images/TrainingDaotao-218x150.png" />
-                        </div>
-                        <div class="col-8 pl-1 pr-3">
-                            <a href="details.html"
-                                ><h4 class="custom-text px-2">
-                                    Đào tạo (Training) – Đâu là thời điểm bạn cần trải nghiệm?
-                                </h4></a
-                            >
-                            <p class="custom-text px-2">
-                                Để thành công, bạn cần quan tâm đến việc tự thúc đẩy, phát triển
-                                những kỹ năng.
-                            </p>
-                            <p class="date-published pl-2">25/09/2020</p>
-                        </div>
-                    </div>
+            <c:if test="${articles.size() > 0}">
+                <div class="header">
+                    <h3 class="pt-5">Mới nhất</h3>
                 </div>
-            </div>
+                <div class="row pl-3">
+                    <c:forEach var="article" items="${articles}">
+                        <div class="col-6 mb-5">
+                            <div class="row news-item">
+                                <div class="col-4 px-0">
+                                    <img src="images/${article.image}" />
+                                </div>
+                                <div class="col-8 pl-1 pr-3">
+                                    <a href="ProcessServlet?action=getArticleDetails&articleId=${article.articleId}"
+                                       ><h4 class="custom-text px-2">
+                                            ${article.title}
+                                        </h4></a
+                                    >
+                                    <p class="custom-text px-2">
+                                        ${article.description}
+                                    </p>
+                                    <p class="date-published pl-2">${article.publishedDate}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </c:forEach>
+                </div>
+            </c:if>
         </div>
         <!-- End body -->
 
