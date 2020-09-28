@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebServlet(name = "ArticleServlet", urlPatterns = { "/ArticleServlet" })
-public class GetArticleServlet extends HttpServlet {
+public class ArticleServlet extends HttpServlet {
     
     private final String HOME_PAGE = "index.jsp";
 

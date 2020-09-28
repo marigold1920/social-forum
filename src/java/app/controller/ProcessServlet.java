@@ -14,18 +14,25 @@ public class ProcessServlet extends HttpServlet {
     private final String REGISTER_ACTION = "register";
     private final String GET_ARTICLE_ACTION = "getArticles";
     private final String GET_ARTICLE_DETAILS_ACTION = "getArticleDetails";
+    private final String POST_COMMENT_ACTION = "postComment";
+    private final String DELETE_COMMENT_ACTION = "deleteComment";
+    private final String MAKE_EMOTION_ACTION = "makeEmotion";
 
     private final String LOGIN_SERVLET = "LoginServlet";
     private final String REGISTER_SERVLET = "RegisterServlet";
     private final String HOME_SERVLET = "HomeServlet";
-    private final String GET_ARTICLE_SERVLET = "GetArticleServlet";
-    private final String GET_ARTICLE_DETAILS_SERVLET = "GetArticleDetailsServlet";
+    private final String ARTICLE_SERVLET = "ArticleServlet";
+    private final String ARTICLE_DETAILS_SERVLET = "ArticleDetailsServlet";
+    private final String COMMENT_SERVLET = "CommentServlet";
+    private final String DELETE_COMMENT_SERVLET = "DeletionCommentServlet";
+    private final String EMOTION_SERVLET = "EmotionServlet";
 
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         String action = request.getParameter("action");
         String url;
-        
+
         if (action == null) {
             action = "";
         }
@@ -42,12 +49,27 @@ public class ProcessServlet extends HttpServlet {
             break;
 
             case GET_ARTICLE_ACTION: {
-                url = GET_ARTICLE_SERVLET;
+                url = ARTICLE_SERVLET;
             }
             break;
 
             case GET_ARTICLE_DETAILS_ACTION: {
-                url = GET_ARTICLE_DETAILS_SERVLET;
+                url = ARTICLE_DETAILS_SERVLET;
+            }
+            break;
+
+            case POST_COMMENT_ACTION: {
+                url = COMMENT_SERVLET;
+            }
+            break;
+
+            case DELETE_COMMENT_ACTION: {
+                url = DELETE_COMMENT_SERVLET;
+            }
+            break;
+
+            case MAKE_EMOTION_ACTION: {
+                url = EMOTION_SERVLET;
             }
             break;
 

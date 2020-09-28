@@ -200,6 +200,10 @@ span {
     border-bottom: 1px solid #c0c0c0;
 }
 
+.item .group-info {
+    display: flex;
+}
+
 .item span {
     font-size: 0.95rem;
     font-weight: 500;
@@ -209,7 +213,7 @@ span {
     padding-left: 15px;
     padding-top: 10px;
     font-size: 0.95rem;
-    font-weight: 300;
+    font-weight: 400;
 }
 
 .item button:hover {

@@ -11,13 +11,15 @@ import lombok.Setter;
 @AllArgsConstructor
 public class ArticleDetailsDTO implements Serializable {
     
+    private Integer articleId;
     private String title;
     private String content;
     private LocalDate publishedDate;
     private Integer likeNumber;
     private Integer dislikeNumber;
 
-    public ArticleDetailsDTO(String title, String content, LocalDate publishedDate) {
+    public ArticleDetailsDTO(Integer articleId, String title, String content, LocalDate publishedDate) {
+        this.articleId = articleId;
         this.title = title;
         this.content = content;
         this.publishedDate = publishedDate;

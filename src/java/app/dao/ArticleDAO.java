@@ -43,7 +43,7 @@ public class ArticleDAO implements Serializable {
 
         try {
             manager.getTransaction().begin();
-            ArticleDetailsDTO article = manager.createQuery("SELECT new app.dto.ArticleDetailsDTO(a.title, a.content, a.publishedDate, a.likeNumber, a.dislikeNumber) "
+            ArticleDetailsDTO article = manager.createQuery("SELECT new app.dto.ArticleDetailsDTO(a.articleId, a.title, a.content, a.publishedDate) "
                     + "FROM Article a WHERE a.articleId = :articleId", ArticleDetailsDTO.class)
                     .setParameter("articleId", articleId)
                     .getSingleResult();

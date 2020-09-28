@@ -21,6 +21,8 @@
         <c:set var="isDisliked" value="${requestScope.isDisliked}" />
         <c:set var="comments" value="${requestScope.comments}" />
         <c:set var="isOwnComment" value="${requestScope.isOwnComment}" />
+        <c:set var="likeArticleAction" value="ProcessServlet?action=makeEmotion&isLike=true&articleId=${article.articleId}" />
+        <c:set var="dislikeArticleAction" value="ProcessServlet?action=makeEmotion&isLike=false&articleId=${article.articleId}" />
         <nav class="navbar navbar-expand-lg bg-info">
             <div class="container">
                 <div class="navbar-translate">
@@ -83,8 +85,8 @@
                         <p>Đăng vào <b>${article.publishedDate}</b></p>
                     </div>
                     <div class="emotions">
-                        <span class="badge badge-info py-2 px-4"><a href="#">${isLiked ? "Liked" : "Like"}</a> ${article.likeNumber}</span>
-                        <span class="badge badge-default py-2 px-4"><a href="#">${isDislike ? "Disliked" : "Dislike"}</a> ${article.dislikeNumber}</span>
+                        <span class="badge badge-info py-2 px-4"><a href="${isLiked ? "" : likeArticleAction}">${isLiked ? "Liked" : "Like"}</a> ${article.likeNumber}</span>
+                        <span class="badge badge-default py-2 px-4"><a href="${isDisliked ? "" : dislikeArticleAction}">${isDisliked ? "Disliked" : "Dislike"}</a> ${article.dislikeNumber}</span>
                     </div>
                 </div>
             </div>
@@ -96,21 +98,28 @@
 
         <!-- Comment -->
         <div class="container">
-            <form class="comment">
+            <form class="comment" action="ProcessServlet" method="post">
                 <h4>Để lại bình luận của bạn</h4>
-                <textarea rows="3" style="width: 100%"></textarea>
-                <button class="btn btn-default" name="action">Bình luận</button>
+                <textarea name="comment" value="" rows="3" style="width: 100%" required ></textarea>
+                <input type="hidden" name="articleId" value="${article.articleId}" />
+                <button class="btn btn-default" name="action" value="postComment">Bình luận</button>
             </form>
             <div class="list">
                 <h4>Các bình luận trước</h4>
                 <c:if test="${comments.size() > 0}">
                     <c:forEach var="comment" items="${comments}">
                         <div class="item">
-                            <span>${comment.name}</span>
-                            <c:if test="${comment.email == user.email}">
-                                <button class="badge badge-warning ml-2" name="action">Xóa</button>
-                            </c:if>
-                            <p>${comment.comment}</p>
+                            <div class="group-info" method="post">
+                                <c:if test="${comment.email == user.email}">
+                                    <form action="ProcessServlet">
+                                        <input type="hidden" name="articleId" value="${article.articleId}" />
+                                        <input type="hidden" name="commentId" value="${comment.commentId}" />
+                                        <button class="badge badge-warning mr-2 text-white" name="action" value="deleteComment">Xóa</button>
+                                    </form>
+                                </c:if>
+                                <span>${comment.name} <span class="text-right text-black-50">${comment.datePosted}</span></span>
+                            </div>
+                            <p style="display: block">${comment.comment}</p>
                         </div>
                     </c:forEach>
                 </c:if>
