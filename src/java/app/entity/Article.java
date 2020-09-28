@@ -27,7 +27,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @NamedQueries({
-    @NamedQuery(name = "Article.findAll", query = "SELECT a FROM Article a ORDER BY a.publishedDate DESC")})
+    @NamedQuery(name = "Article.findAll", query = "SELECT a FROM Article a ORDER BY a.publishedDate DESC")
+})
 public class Article implements Serializable {
 
     private static final long serialVersionUID = 1L;

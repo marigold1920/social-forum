@@ -14,7 +14,7 @@ import javax.persistence.Query;
 
 public class ArticleDAO implements Serializable {
 
-    public Collection<ArticleDTO> findAll(int pageNumber) {
+    public Collection<ArticleDTO> findAllAndPaging(int pageNumber) {
         EntityManager manager = DBUtil.getEntityManager();
 
         try {
@@ -28,7 +28,32 @@ public class ArticleDAO implements Serializable {
 
             return articles;
         } catch (Exception error) {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "Fail to load article from database", error);
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "ArticleDAO.findAllAndPaging()", error);
+
+            return Collections.EMPTY_LIST;
+        } finally {
+            if (manager != null) {
+                manager.close();
+            }
+        }
+    }
+    
+    public Collection<ArticleDTO> searchByContentAndPaging(String keyword, int pageNumber) {
+        EntityManager manager = DBUtil.getEntityManager();
+
+        try {
+            manager.getTransaction().begin();
+            Query query = manager.createQuery("SELECT new app.dto.ArticleDTO(a.articleId, a.title, a.description, a.image, a.publishedDate)"
+                    + " FROM Article a WHERE a.content LIKE CONCAT('%',:keyword,'%') ORDER BY a.publishedDate DESC");
+            query.setFirstResult((pageNumber - 1) * Constant.PAGE_SIZE);
+            query.setMaxResults(Constant.PAGE_SIZE);
+            query.setParameter("keyword", keyword);
+            Collection<ArticleDTO> articles = (Collection<ArticleDTO>) query.getResultList();
+            manager.getTransaction().commit();
+
+            return articles;
+        } catch (Exception error) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "ArticleDAO.searchByContentAndPaging()", error);
 
             return Collections.EMPTY_LIST;
         } finally {
@@ -51,7 +76,7 @@ public class ArticleDAO implements Serializable {
 
             return article;
         } catch (Exception error) {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "Fail to load article from database", error);
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "ArticleDAO.getArticleDetails()", error);
 
             return null;
         } finally {

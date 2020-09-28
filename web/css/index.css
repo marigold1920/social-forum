@@ -53,7 +53,7 @@ span {
 }
 
 .nav-item span {
-    font-size: 1.25rem;
+    font-size: 1.05rem;
     font-weight: 400;
     color: #fff !important;
     padding: 0 15px;
@@ -278,7 +278,7 @@ span {
     box-shadow: 4px 8px 10px rgba(196, 213, 247, 0.3);
     border-radius: 5px;
     padding: 20px;
-    margin-bottom: 20px;
+    margin-top: 15px;
 }
 
 .custom-form h4 {

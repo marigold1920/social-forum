@@ -17,7 +17,7 @@ public class HomeServlet extends HttpServlet {
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ArticleDAO articleDAO = new ArticleDAO();
         
-        request.getSession().setAttribute("articles", articleDAO.findAll(1));
+        request.getSession().setAttribute("articles", articleDAO.findAllAndPaging(1));
         response.sendRedirect(HOME_PAGE);
     }
 }

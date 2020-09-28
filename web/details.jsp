@@ -16,6 +16,11 @@
     </head>
     <body class="page">
         <c:set var="user" value="${sessionScope.USER}" />
+        
+        <c:if test="${empty user}">
+            <c:redirect url="login.jsp" />
+        </c:if>
+        
         <c:set var="article" value="${requestScope.article}" />
         <c:set var="isLiked" value="${requestScope.isLiked}" />
         <c:set var="isDisliked" value="${requestScope.isDisliked}" />
@@ -43,15 +48,6 @@
                 </div>
                 <div class="collapse navbar-collapse" id="example-navbar-info">
                     <ul class="navbar-nav ml-auto">
-                        <form class="form-custom" action="#" method="post">
-                            <input
-                                class="form-control form-control-round"
-                                type="search"
-                                value=""
-                                name="search"
-                                />
-                            <button class="btn btn-primary btn-round" name="action">Search</button>
-                        </form>
                         <li class="nav-item active">
                             <a class="btn btn-success btn-round" href="#pablo">Tạo bài viết</a>
                         </li>
@@ -67,7 +63,7 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <a class="dropdown-item" href="#">Quản lí bài viết</a>
-                                <a class="dropdown-item" href="#">Đăng xuất</a>
+                                <a class="dropdown-item" href="ProcessServlet?action=logout">Đăng xuất</a>
                             </div>
                         </li>
                     </ul>

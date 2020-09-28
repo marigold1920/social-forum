@@ -18,6 +18,8 @@
     </head>
     <body class="page">
         <c:set var="aritcles" value="${sessionScope.articles}" />
+        <c:set var="user" value="${sessionScope.USER}" />
+        <c:set var="keyword" value="${sessionScope.keyword}" />
         <!-- Navigation -->
         <nav class="navbar navbar-expand-lg bg-info">
             <div class="container">
@@ -38,34 +40,43 @@
                     </button>
                 </div>
                 <div class="collapse navbar-collapse" id="example-navbar-info">
-                    <ul class="navbar-nav ml-auto">
-                        <form class="form-custom" action="#" method="post">
-                            <input
-                                class="form-control form-control-round"
-                                type="search"
-                                value=""
-                                name="search"
-                                />
-                            <button class="btn btn-primary btn-round" name="action">Search</button>
-                        </form>
-                        <li class="nav-item active">
-                            <a class="btn btn-success btn-round" href="#pablo">Tạo bài viết</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a
-                                class="nav-link dropdown-toggle"
-                                id="navbarDropdownMenuLink"
-                                data-toggle="dropdown"
-                                aria-haspopup="true"
-                                aria-expanded="false"
-                                >
-                                <span>Victor</span>
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" href="#">Quản lí bài viết</a>
-                                <a class="dropdown-item" href="#">Đăng xuất</a>
-                            </div>
-                        </li>
+                    <ul class="navbar-nav ml-auto"><c:choose>
+                            <c:when test="${not empty user}">
+                                <form class="form-custom" action="ProcessServlet" method="post">
+                                    <input
+                                        class="form-control form-control-round"
+                                        type="search"
+                                        value="${keyword}"
+                                        name="keyword"
+                                        placeholder="Tìm kiếm nội dung"
+                                        />
+                                    <button class="btn btn-primary btn-round" name="action" value="search">Search</button>
+                                </form>
+                                <li class="nav-item active">
+                                    <a class="btn btn-success btn-round" href="createArticle.jsp">Tạo bài viết</a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a
+                                        class="nav-link dropdown-toggle"
+                                        id="navbarDropdownMenuLink"
+                                        data-toggle="dropdown"
+                                        aria-haspopup="true"
+                                        aria-expanded="false"
+                                        >
+                                        <span>Victor</span>
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                        <a class="dropdown-item" href="#">Quản lí bài viết</a>
+                                        <a class="dropdown-item" href="ProcessServlet?action=logout">Đăng xuất</a>
+                                    </div>
+                                </li>
+                            </c:when>
+                            <c:otherwise>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="login.jsp">Đăng nhập</a> hoặc <a class="nav-link" href="login.jsp">Đăng ký</a> để Tìm kiếm hoặc Đăng bài.
+                                </li>
+                            </c:otherwise>
+                        </c:choose>                           
                     </ul>
                 </div>
             </div>
