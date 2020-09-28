@@ -13,8 +13,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -42,7 +40,14 @@ public class ArticleInteraction implements Serializable {
     @Column(name = "interaction_date")
     private LocalDate interactionDate;
     
+    @Column(name = "comment")
+    private String comment;
+    
     @JoinColumn(name = "account_id", referencedColumnName = "email")
     @ManyToOne(fetch = FetchType.LAZY)
-    private Account accountId; 
+    private Account account;
+    
+    @JoinColumn(name = "article_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Article article;
 }

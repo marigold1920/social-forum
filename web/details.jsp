@@ -15,7 +15,12 @@
         <title>Social Forum</title>
     </head>
     <body class="page">
+        <c:set var="user" value="${sessionScope.USER}" />
         <c:set var="article" value="${requestScope.article}" />
+        <c:set var="isLiked" value="${requestScope.isLiked}" />
+        <c:set var="isDisliked" value="${requestScope.isDisliked}" />
+        <c:set var="comments" value="${requestScope.comments}" />
+        <c:set var="isOwnComment" value="${requestScope.isOwnComment}" />
         <nav class="navbar navbar-expand-lg bg-info">
             <div class="container">
                 <div class="navbar-translate">
@@ -78,8 +83,8 @@
                         <p>Đăng vào <b>${article.publishedDate}</b></p>
                     </div>
                     <div class="emotions">
-                        <span class="badge badge-info py-2 px-4"><a href="#">Like</a> 26</span>
-                        <span class="badge badge-default py-2 px-4"><a href="#">Dislike</a> 2</span>
+                        <span class="badge badge-info py-2 px-4"><a href="#">${isLiked ? "Liked" : "Like"}</a> ${article.likeNumber}</span>
+                        <span class="badge badge-default py-2 px-4"><a href="#">${isDislike ? "Disliked" : "Dislike"}</a> ${article.dislikeNumber}</span>
                     </div>
                 </div>
             </div>
@@ -98,28 +103,17 @@
             </form>
             <div class="list">
                 <h4>Các bình luận trước</h4>
-                <div class="item">
-                    <span>Peter Rain</span>
-                    <button class="badge badge-warning ml-2" name="action">Xóa</button>
-                    <p>
-                        Bài viết khá hay, có điều nên focus nhiều vô concept, chứ chi tiết quá nó bị
-                        loãng
-                    </p>
-                </div>
-                <div class="item">
-                    <span>Peter Rain</span>
-                    <p>
-                        Bài viết khá hay, có điều nên focus nhiều vô concept, chứ chi tiết quá nó bị
-                        loãng
-                    </p>
-                </div>
-                <div class="item">
-                    <span>Peter Rain</span>
-                    <p>
-                        Bài viết khá hay, có điều nên focus nhiều vô concept, chứ chi tiết quá nó bị
-                        loãng
-                    </p>
-                </div>
+                <c:if test="${comments.size() > 0}">
+                    <c:forEach var="comment" items="${comments}">
+                        <div class="item">
+                            <span>${comment.name}</span>
+                            <c:if test="${comment.email == user.email}">
+                                <button class="badge badge-warning ml-2" name="action">Xóa</button>
+                            </c:if>
+                            <p>${comment.comment}</p>
+                        </div>
+                    </c:forEach>
+                </c:if>
             </div>
         </div>
         <!-- End comment -->

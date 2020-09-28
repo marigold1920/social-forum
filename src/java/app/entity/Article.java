@@ -2,6 +2,7 @@ package app.entity;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Collection;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,6 +15,7 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -50,6 +52,12 @@ public class Article implements Serializable {
     @Column(name = "image")
     private String image;
     
+    @Column(name = "like_number")
+    private Integer likeNumber;
+    
+    @Column(name = "dislike_number")
+    private Integer dislikeNumber;
+    
     @Column(name = "published_date")
     private LocalDate publishedDate;
     
@@ -60,4 +68,7 @@ public class Article implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE })
     @JoinColumn(name = "owner", referencedColumnName = "email")
     private Account owner;
+    
+    @OneToMany(mappedBy = "article")
+    private Collection<ArticleInteraction> interactions;
 }

@@ -1,7 +1,7 @@
 package app.dao;
 
 import app.dto.ArticleDTO;
-import app.entity.Article;
+import app.dto.ArticleDetailsDTO;
 import app.util.Constant;
 import app.util.DBUtil;
 import java.io.Serializable;
@@ -25,7 +25,7 @@ public class ArticleDAO implements Serializable {
             query.setMaxResults(Constant.PAGE_SIZE);
             Collection<ArticleDTO> articles = (Collection<ArticleDTO>) query.getResultList();
             manager.getTransaction().commit();
- 
+
             return articles;
         } catch (Exception error) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, "Fail to load article from database", error);
@@ -37,17 +37,18 @@ public class ArticleDAO implements Serializable {
             }
         }
     }
-    
-    public Article getArticleDetails(int articleId) {
+
+    public ArticleDetailsDTO getArticleDetails(int articleId, String email) {
         EntityManager manager = DBUtil.getEntityManager();
 
         try {
             manager.getTransaction().begin();
-            Article article = manager.createQuery("SELECT a FROM Article a WHERE a.articleId = :articleId", Article.class)
+            ArticleDetailsDTO article = manager.createQuery("SELECT new app.dto.ArticleDetailsDTO(a.title, a.content, a.publishedDate, a.likeNumber, a.dislikeNumber) "
+                    + "FROM Article a WHERE a.articleId = :articleId", ArticleDetailsDTO.class)
                     .setParameter("articleId", articleId)
                     .getSingleResult();
             manager.getTransaction().commit();
- 
+
             return article;
         } catch (Exception error) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, "Fail to load article from database", error);
