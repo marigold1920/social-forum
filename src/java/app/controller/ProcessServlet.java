@@ -14,7 +14,6 @@ public class ProcessServlet extends HttpServlet {
     private final String LOGIN_ACTION = "login";
     private final String LOGOUT_ACTION = "logout";
     private final String REGISTER_ACTION = "register";
-//    private final String GET_ARTICLE_ACTION = "getArticles";
     private final String GET_ARTICLE_DETAILS_ACTION = "getArticleDetails";
     private final String POST_COMMENT_ACTION = "postComment";
     private final String DELETE_COMMENT_ACTION = "deleteComment";
@@ -25,7 +24,6 @@ public class ProcessServlet extends HttpServlet {
     private final String LOGOUT_SERVLET = "LogoutServlet";
     private final String REGISTER_SERVLET = "RegisterServlet";
     private final String HOME_SERVLET = "HomeServlet";
-//    private final String ARTICLE_SERVLET = "ArticleServlet";
     private final String ARTICLE_DETAILS_SERVLET = "ArticleDetailsServlet";
     private final String COMMENT_SERVLET = "CommentServlet";
     private final String DELETE_COMMENT_SERVLET = "DeletionCommentServlet";

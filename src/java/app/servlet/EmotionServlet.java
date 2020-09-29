@@ -19,16 +19,17 @@ public class EmotionServlet extends HttpServlet {
         Account user = (Account) request.getSession().getAttribute("USER");
         int articleId = Integer.parseInt(request.getParameter("articleId"));
         boolean isLike = Boolean.parseBoolean(request.getParameter("isLike"));
+        boolean isDislike = Boolean.parseBoolean(request.getParameter("isDislike"));
         String path = "ProcessServlet?action=getArticleDetails&aritcleId=" + articleId;
         EmotionDAO emotionDAO = new EmotionDAO();
         Emotion emotion = emotionDAO.findByEmailAndArticleId(user.getEmail(), articleId) ;
         
         if (emotion != null) {
-            emotion.setDislike(!isLike);
             emotion.setLike(isLike);
+            emotion.setDislike(isDislike);
             emotionDAO.updateEmotion(emotion);
         } else {
-            emotion = new Emotion(isLike, !isLike, user, new Article(articleId));
+            emotion = new Emotion(isLike, isDislike, user, new Article(articleId));
  
             emotionDAO.saveEmotion(emotion);
         }

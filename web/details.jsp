@@ -26,8 +26,8 @@
         <c:set var="isDisliked" value="${requestScope.isDisliked}" />
         <c:set var="comments" value="${requestScope.comments}" />
         <c:set var="isOwnComment" value="${requestScope.isOwnComment}" />
-        <c:set var="likeArticleAction" value="ProcessServlet?action=makeEmotion&isLike=true&articleId=${article.articleId}" />
-        <c:set var="dislikeArticleAction" value="ProcessServlet?action=makeEmotion&isLike=false&articleId=${article.articleId}" />
+        <c:set var="likeArticleAction" value="ProcessServlet?action=makeEmotion&isLike=${!isLiked}&isDislike=${!isLiked ? false : isDisliked}&articleId=${article.articleId}" />
+        <c:set var="dislikeArticleAction" value="ProcessServlet?action=makeEmotion&&isDislike=${!isDisliked}&isLike=${!isDisliked ? false : isLiked}&articleId=${article.articleId}" />
         <nav class="navbar navbar-expand-lg bg-info">
             <div class="container">
                 <div class="navbar-translate">
@@ -81,8 +81,8 @@
                         <p>Đăng vào <b>${article.publishedDate}</b></p>
                     </div>
                     <div class="emotions">
-                        <span class="badge badge-info py-2 px-4"><a href="${isLiked ? "" : likeArticleAction}">${isLiked ? "Liked" : "Like"}</a> ${article.likeNumber}</span>
-                        <span class="badge badge-default py-2 px-4"><a href="${isDisliked ? "" : dislikeArticleAction}">${isDisliked ? "Disliked" : "Dislike"}</a> ${article.dislikeNumber}</span>
+                        <span class="badge badge-info py-2 px-4"><a href="${likeArticleAction}">${isLiked ? "Liked" : "Like"}</a> ${article.likeNumber}</span>
+                        <span class="badge badge-default py-2 px-4"><a href="${dislikeArticleAction}">${isDisliked ? "Disliked" : "Dislike"}</a> ${article.dislikeNumber}</span>
                     </div>
                 </div>
             </div>
