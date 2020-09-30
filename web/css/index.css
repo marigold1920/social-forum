@@ -306,3 +306,32 @@ span {
 .bottom-line {
     border-bottom: 1px solid #494958;
 }
+
+
+.error-page {
+    min-height: 100vh;
+    background-image: url(https://i.imgur.com/yW2W9SC.png);
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 40vw;
+}
+
+.error-page h1 {
+    font-size: 10.05rem;
+    font-weight: 700;
+}
+
+.error-page span {
+    font-size: 3.05rem;
+    font-weight: 500;
+    color: #fff !important;
+}
+
+.error-page a {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-top: 20px;
+}
