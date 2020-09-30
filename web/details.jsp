@@ -31,7 +31,7 @@
         <nav class="navbar navbar-expand-lg bg-info">
             <div class="container">
                 <div class="navbar-translate">
-                    <a class="navbar-brand" href="index.jsp">Social Forum</a>
+                    <a class="navbar-brand" href="ProcessServlet">Social Forum</a>
                     <button
                         class="navbar-toggler"
                         type="button"
@@ -59,7 +59,7 @@
                                 aria-haspopup="true"
                                 aria-expanded="false"
                                 >
-                                <span>Victor</span>
+                                <span>${user.name}</span>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <a class="dropdown-item" href="#">Quản lí bài viết</a>

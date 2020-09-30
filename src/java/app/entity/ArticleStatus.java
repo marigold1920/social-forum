@@ -26,4 +26,7 @@ public class ArticleStatus implements Serializable {
     
     @Column(name = "name")
     private String name;
+    
+    @Column(name = "is_default")
+    private boolean isDefault;
 }

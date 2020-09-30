@@ -21,7 +21,7 @@
         <nav class="navbar navbar-expand-lg bg-info">
             <div class="container">
                 <div class="navbar-translate">
-                    <a class="navbar-brand" href="index.html">Social Forum</a>
+                    <a class="navbar-brand" href="ProcessServlet">Social Forum</a>
                 </div>
             </div>
         </nav>

@@ -10,19 +10,21 @@ import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 public class ArticleDAO implements Serializable {
 
-    public Collection<ArticleDTO> findAllAndPaging(int pageNumber) {
+    public Collection<ArticleDTO> findAllAndPaging(String keyword, int pageNumber) {
         EntityManager manager = DBUtil.getEntityManager();
 
         try {
             manager.getTransaction().begin();
             Query query = manager.createQuery("SELECT new app.dto.ArticleDTO(a.articleId, a.title, a.description, a.image, a.publishedDate)"
-                    + " FROM Article a ORDER BY a.publishedDate DESC");
+                    + " FROM Article a WHERE a.status.isDefault = true AND a.content LIKE CONCAT('%', :keyword,'%') ORDER BY a.publishedDate DESC");
             query.setFirstResult((pageNumber - 1) * Constant.PAGE_SIZE);
             query.setMaxResults(Constant.PAGE_SIZE);
+            query.setParameter("keyword", keyword);
             Collection<ArticleDTO> articles = (Collection<ArticleDTO>) query.getResultList();
             manager.getTransaction().commit();
 
@@ -79,6 +81,32 @@ public class ArticleDAO implements Serializable {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, "ArticleDAO.getArticleDetails()", error);
 
             return null;
+        } finally {
+            if (manager != null) {
+                manager.close();
+            }
+        }
+    }
+    
+    public int getTotalPage(String keyword) {
+        EntityManager manager = DBUtil.getEntityManager();
+
+        try {
+            manager.getTransaction().begin();
+            long totalPage = manager.createQuery("SELECT COUNT(a.articleId) FROM Article a"
+                    + " WHERE a.status.isDefault = true AND a.content LIKE CONCAT('%',:keyword,'%')", Long.class)
+                    .setParameter("keyword", keyword)
+                    .getSingleResult();
+            manager.getTransaction().commit();
+
+            return (int) Math.ceil(totalPage * 1.0 / Constant.PAGE_SIZE);
+        } catch (NoResultException error) {
+
+            return 0;
+        } catch (Exception error) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "ArticleDAO.getTotalPage()", error);
+
+            return 0;
         } finally {
             if (manager != null) {
                 manager.close();

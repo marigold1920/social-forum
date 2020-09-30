@@ -28,7 +28,6 @@ public class ProcessServlet extends HttpServlet {
     private final String COMMENT_SERVLET = "CommentServlet";
     private final String DELETE_COMMENT_SERVLET = "DeletionCommentServlet";
     private final String EMOTION_SERVLET = "EmotionServlet";
-    private final String SEARCH_SERVLET = "SearchServlet";
 
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -83,7 +82,7 @@ public class ProcessServlet extends HttpServlet {
             break;
 
             case SEARCH_ACTION: {
-                url = SEARCH_SERVLET;
+                url = HOME_SERVLET;
             }
             break;
 

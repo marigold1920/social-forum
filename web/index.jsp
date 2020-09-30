@@ -20,11 +20,13 @@
         <c:set var="aritcles" value="${sessionScope.articles}" />
         <c:set var="user" value="${sessionScope.USER}" />
         <c:set var="keyword" value="${sessionScope.keyword}" />
+        <c:set var="totalPage" value="${sessionScope.totalPage}" />
+        <c:set var="currentPage" value="${sessionScope.currentPage}" />
         <!-- Navigation -->
         <nav class="navbar navbar-expand-lg bg-info">
             <div class="container">
                 <div class="navbar-translate">
-                    <a class="navbar-brand" href="#pablo">Social Forum</a>
+                    <a class="navbar-brand" href="ProcessServlet">Social Forum</a>
                     <button
                         class="navbar-toggler"
                         type="button"
@@ -63,7 +65,7 @@
                                         aria-haspopup="true"
                                         aria-expanded="false"
                                         >
-                                        <span>Victor</span>
+                                        <span>${user.name}</span>
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                         <a class="dropdown-item" href="#">Quản lí bài viết</a>
@@ -118,24 +120,15 @@
         <!-- Pagination -->
         <div class="container">
             <ul class="pagination pagination-primary align-center">
-                <li class="page-item active">
-                    <a class="page-link" href="#">1</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="#link">2</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="#link">3</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="#link">4</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="#link">5</a>
-                </li>
+                <c:forEach var="page" begin="1" end="${totalPage}">
+                    <li class="page-item ${page == currentPage ? "active" : ""}">
+                        <a class="page-link" href="ProcessServlet?page=${page}">${page}</a>
+                    </li>
+                </c:forEach>
             </ul>
         </div>
         <!-- End pagination -->
+        ${totalPage}
     </body>
 </html>
 
