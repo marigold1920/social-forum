@@ -23,7 +23,7 @@ public class EmotionDAO implements Serializable {
 
             return emotion;
         } catch (NoResultException error) {
-            
+
             return null;
         } catch (Exception error) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, "EmotionDAO.findByEmailAndArticleId()", error);
@@ -81,7 +81,7 @@ public class EmotionDAO implements Serializable {
 
             return emotion != null;
         } catch (NoResultException error) {
-            
+
             return false;
         } catch (Exception error) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, "EmotionDAO.isLiked()", error);
@@ -93,7 +93,7 @@ public class EmotionDAO implements Serializable {
             }
         }
     }
-    
+
     public boolean isDisliked(String email, int articleId) {
         EntityManager manager = DBUtil.getEntityManager();
 
@@ -107,7 +107,7 @@ public class EmotionDAO implements Serializable {
 
             return emotion != null;
         } catch (NoResultException error) {
-            
+
             return false;
         } catch (Exception error) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, "EmotionDAO.isDisliked()", error);
@@ -132,10 +132,10 @@ public class EmotionDAO implements Serializable {
 
             return (int) likeNumber;
         } catch (NoResultException error) {
-            
+
             return 0;
         } catch (Exception error) {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "EmotionDAO.isLiked()", error);
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "EmotionDAO.countLike()", error);
 
             return 0;
         } finally {
@@ -157,10 +157,10 @@ public class EmotionDAO implements Serializable {
 
             return (int) likeNumber;
         } catch (NoResultException error) {
-            
+
             return 0;
         } catch (Exception error) {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "EmotionDAO.isDisliked()", error);
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "EmotionDAO.countDislike()", error);
 
             return 0;
         } finally {

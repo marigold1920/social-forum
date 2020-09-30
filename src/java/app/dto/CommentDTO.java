@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class CommentDTO implements Serializable {
-    
+
     private Integer commentId;
     private String name;
     private String email;

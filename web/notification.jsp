@@ -41,7 +41,7 @@
                 <div class="collapse navbar-collapse" id="example-navbar-info">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item active">
-                            <a class="btn btn-success btn-round" href="#pablo">Tạo bài viết</a>
+                            <a class="btn btn-success btn-round" href="createArticle.jsp">Tạo bài viết</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a
@@ -55,7 +55,6 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <a class="dropdown-item" href="ProcessServlet?action=showNotification">Thông báo</a>
-                                <a class="dropdown-item" href="#">Quản lí bài viết</a>
                                 <a class="dropdown-item" href="ProcessServlet?action=logout">Đăng xuất</a>
                             </div>
                         </li>

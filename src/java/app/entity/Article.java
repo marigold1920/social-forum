@@ -38,29 +38,29 @@ public class Article implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "article_id")
     private Integer articleId;
-    
+
     @Column(name = "title")
     private String title;
-    
+
     @Lob
     @Column(name = "description")
     private String description;
-    
+
     @Lob
     @Column(name = "content")
     private String content;
-    
+
     @Column(name = "image", columnDefinition = "VARCHAR(100) DEFAULT TrainingDaotao.png")
     private String image;
-     
+
     @Column(name = "published_date")
     private LocalDate publishedDate;
-    
-    @ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE })
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE})
     @JoinColumn(name = "status", referencedColumnName = "status_id")
     private ArticleStatus status;
-    
-    @ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE })
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE})
     @JoinColumn(name = "owner", referencedColumnName = "email")
     private Account owner;
 }

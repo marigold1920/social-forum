@@ -25,7 +25,7 @@ public class ArticleDetailsServlet extends HttpServlet {
         CommentDAO articleInteractionDAO = new CommentDAO();
         EmotionDAO emotionDAO = new EmotionDAO();
         ArticleDetailsDTO article = articleDAO.getArticleDetails(articleId, user.getEmail());
-        
+
         article.setLikeNumber(emotionDAO.countLike(articleId));
         article.setDislikeNumber(emotionDAO.countDislike(articleId));
 

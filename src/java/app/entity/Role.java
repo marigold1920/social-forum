@@ -24,14 +24,14 @@ import lombok.Setter;
 public class Role implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+
     @Id
     @Column(name = "role_id")
     private String roleId;
-    
+
     @Column(name = "name")
     private String name;
-    
+
     @Column(name = "is_default")
     private int isDefault;
 }

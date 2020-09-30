@@ -21,7 +21,7 @@ public class DeletionCommentServlet extends HttpServlet {
         int articleId = Integer.parseInt(request.getParameter("articleId").trim());
         String path = "ProcessServlet?action=getArticleDetails&aritcleId=" + articleId;
         CommentDAO commentDAO = new CommentDAO();
-        
+
         commentDAO.removeComment(new Comment(commentId, account, Article.builder().articleId(articleId).build()));
         request.getRequestDispatcher(path).forward(request, response);
     }

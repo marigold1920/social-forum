@@ -5,8 +5,9 @@ public class Constant {
     // Page size
     public static final int PAGE_SIZE = 20;
     
-    // Default Article Status
+    // Default Value
     public static final String DEFAULT_ARTICLE_STATUS = "ACTIVE";
+    public static final String DEFAULT_IMAGE_URL = "TrainingDaotao.png";
     
     // Status
     public static final String DEFAULT_ACCOUNT_STATUS = "New";

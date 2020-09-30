@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class ArticleDetailsDTO implements Serializable {
-    
+
     private Integer articleId;
     private String title;
     private String content;

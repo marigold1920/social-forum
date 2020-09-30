@@ -29,6 +29,7 @@ public class CreateArticleServlet extends HttpServlet {
                 .description(description)
                 .content(content)
                 .owner(user)
+                .image(Constant.DEFAULT_IMAGE_URL)
                 .status(ArticleStatus.builder().statusId(Constant.DEFAULT_ARTICLE_STATUS).build())
                 .build();
 

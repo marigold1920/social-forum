@@ -57,8 +57,7 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <a class="dropdown-item" href="ProcessServlet?action=showNotification">Thông báo</a>
-                                <a class="dropdown-item" href="#">Quản lí bài viết</a>
-                                <a class="dropdown-item" href="#">Đăng xuất</a>
+                                <a class="dropdown-item" href="ProcessServlet?action=logout">Đăng xuất</a>
                             </div>
                         </li>
                     </ul>

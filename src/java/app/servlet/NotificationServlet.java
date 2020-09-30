@@ -16,7 +16,7 @@ public class NotificationServlet extends HttpServlet {
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Account user = (Account) request.getSession().getAttribute("USER");
         NotificationDAO notificationDAO = new NotificationDAO();
-        
+
         request.getSession().setAttribute("notifications", notificationDAO.findAllByEmail(user.getEmail()));
         response.sendRedirect("notification.jsp");
     }

@@ -21,14 +21,14 @@ import lombok.Setter;
 public class ArticleStatus implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+
     @Id
     @Column(name = "status_id")
     private String statusId;
-    
+
     @Column(name = "name")
     private String name;
-    
+
     @Column(name = "is_default")
     private boolean isDefault;
 }

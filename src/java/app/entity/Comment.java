@@ -29,24 +29,24 @@ import lombok.Setter;
     @NamedQuery(name = "ArticleInteraction.findByEmail", query = "SELECT a FROM Comment a WHERE a.account.email = :email")
 })
 public class Comment implements Serializable {
-    
+
     private static final long serialVersionUID = 1L;
-        
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "comment_id")
     private Integer commentId;
-    
+
     @Column(name = "comment")
     private String comment;
-    
+
     @Column(name = "date_posted")
     private LocalDate datePosted;
-    
+
     @JoinColumn(name = "account_id", referencedColumnName = "email")
     @ManyToOne(fetch = FetchType.LAZY)
     private Account account;
-    
+
     @JoinColumn(name = "article_id")
     @ManyToOne(fetch = FetchType.LAZY)
     private Article article;

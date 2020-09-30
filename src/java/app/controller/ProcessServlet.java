@@ -99,7 +99,7 @@ public class ProcessServlet extends HttpServlet {
                 url = SHOW_NOTIFICATION_SERVLET;
             }
             break;
-            
+
             default:
                 url = HOME_SERVLET;
         }

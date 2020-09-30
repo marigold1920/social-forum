@@ -20,7 +20,6 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "RegisterServlet", urlPatterns = {"/RegisterServlet"})
 public class RegisterServlet extends HttpServlet {
 
-//    private final String HOME_PAGE = "index.jsp";
     private final String LOGIN_PAGE = "login.jsp";
 
     @Override
@@ -32,11 +31,11 @@ public class RegisterServlet extends HttpServlet {
         ErrorMessage errorObj = new ErrorMessage();
         AccountDAO accountDAO = new AccountDAO();
         RoleDAO roleDAO = new RoleDAO();
-        
+
         if (!confirmPassword.equals(password)) {
             errorObj.setPasswordNotMatch(Constant.PASSWORD_NON_MATCH);
         }
-        
+
         if (accountDAO.isExistedAccount(email)) {
             errorObj.setMailExisted(Constant.EMAIL_EXISTED);
         }
@@ -48,7 +47,6 @@ public class RegisterServlet extends HttpServlet {
                 account.setStatus(Constant.DEFAULT_ACCOUNT_STATUS);
                 accountDAO.saveAccount(account);
                 request.setAttribute("isSuccess", true);
-//                response.sendRedirect(HOME_PAGE);
             } else {
                 request.setAttribute("errorObj", errorObj);
                 request.setAttribute("registerEmail", email);
