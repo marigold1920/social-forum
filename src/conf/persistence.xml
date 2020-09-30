@@ -5,6 +5,9 @@
     <class>app.entity.Account</class>
     <class>app.entity.Article</class>
     <class>app.entity.ArticleStatus</class>
+    <class>app.entity.Comment</class>
+    <class>app.entity.Emotion</class>
+    <class>app.entity.Notification</class>
     <class>app.entity.Role</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>

@@ -17,11 +17,13 @@ public class ArticleDetailsDTO implements Serializable {
     private LocalDate publishedDate;
     private Integer likeNumber;
     private Integer dislikeNumber;
+    private String owner;
 
-    public ArticleDetailsDTO(Integer articleId, String title, String content, LocalDate publishedDate) {
+    public ArticleDetailsDTO(Integer articleId, String title, String content, LocalDate publishedDate, String owner) {
         this.articleId = articleId;
         this.title = title;
         this.content = content;
         this.publishedDate = publishedDate;
+        this.owner = owner;
     }
 }

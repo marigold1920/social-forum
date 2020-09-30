@@ -16,6 +16,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -24,6 +25,7 @@ import lombok.Setter;
 @Table(name = "article")
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @NamedQueries({
@@ -48,7 +50,7 @@ public class Article implements Serializable {
     @Column(name = "content")
     private String content;
     
-    @Column(name = "image")
+    @Column(name = "image", columnDefinition = "VARCHAR(100) DEFAULT TrainingDaotao.png")
     private String image;
      
     @Column(name = "published_date")
@@ -61,8 +63,4 @@ public class Article implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE })
     @JoinColumn(name = "owner", referencedColumnName = "email")
     private Account owner;
-
-    public Article(Integer articleId) {
-        this.articleId = articleId;
-    }
 }

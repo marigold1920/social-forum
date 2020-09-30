@@ -19,6 +19,7 @@ public class ProcessServlet extends HttpServlet {
     private final String DELETE_COMMENT_ACTION = "deleteComment";
     private final String MAKE_EMOTION_ACTION = "makeEmotion";
     private final String SEARCH_ACTION = "search";
+    private final String CREATE_ARTICLE_ACTION = "createArticle";
 
     private final String LOGIN_SERVLET = "LoginServlet";
     private final String LOGOUT_SERVLET = "LogoutServlet";
@@ -28,6 +29,7 @@ public class ProcessServlet extends HttpServlet {
     private final String COMMENT_SERVLET = "CommentServlet";
     private final String DELETE_COMMENT_SERVLET = "DeletionCommentServlet";
     private final String EMOTION_SERVLET = "EmotionServlet";
+    private final String CREATE_ARTICLE_SERVLET = "CreateArticleServlet";
 
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -86,6 +88,10 @@ public class ProcessServlet extends HttpServlet {
             }
             break;
 
+            case CREATE_ARTICLE_ACTION: {
+                url = CREATE_ARTICLE_SERVLET;
+            }
+            break;
             default:
                 url = HOME_SERVLET;
         }

@@ -22,7 +22,7 @@ public class DeletionCommentServlet extends HttpServlet {
         String path = "ProcessServlet?action=getArticleDetails&aritcleId=" + articleId;
         CommentDAO commentDAO = new CommentDAO();
         
-        commentDAO.removeComment(new Comment(commentId, account, new Article(articleId)));
+        commentDAO.removeComment(new Comment(commentId, account, Article.builder().articleId(articleId).build()));
         request.getRequestDispatcher(path).forward(request, response);
     }
 }

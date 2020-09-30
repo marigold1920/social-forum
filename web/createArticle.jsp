@@ -17,6 +17,8 @@
     </head>
     <body class="page">
     <c:set var="user" value="${sessionScope.USER}" />
+    <c:set var="success" value="${requestScope.success}" />
+    <c:set var="fail" value="${requestScope.fail}" />
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg bg-info">
         <div class="container">
@@ -61,7 +63,9 @@
 
     <!-- Body -->
     <div class="container" style="display: flex; justify-content: center">
-        <form class="custom-form" action="ProcessServlet">
+        <form class="custom-form" action="ProcessServlet" method="post">
+            <label class="text-success mt-3">${success}</label>
+            <label class="text-error mt-3">${fail}</label>
             <input
                 class="form-control"
                 name="title"

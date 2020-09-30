@@ -16,18 +16,18 @@
     </head>
     <body class="page">
         <c:set var="user" value="${sessionScope.USER}" />
-        
+
         <c:if test="${empty user}">
             <c:redirect url="login.jsp" />
         </c:if>
-        
+
         <c:set var="article" value="${requestScope.article}" />
         <c:set var="isLiked" value="${requestScope.isLiked}" />
         <c:set var="isDisliked" value="${requestScope.isDisliked}" />
         <c:set var="comments" value="${requestScope.comments}" />
         <c:set var="isOwnComment" value="${requestScope.isOwnComment}" />
-        <c:set var="likeArticleAction" value="ProcessServlet?action=makeEmotion&isLike=${!isLiked}&isDislike=${!isLiked ? false : isDisliked}&articleId=${article.articleId}" />
-        <c:set var="dislikeArticleAction" value="ProcessServlet?action=makeEmotion&&isDislike=${!isDisliked}&isLike=${!isDisliked ? false : isLiked}&articleId=${article.articleId}" />
+        <c:set var="likeArticleAction" value="ProcessServlet?action=makeEmotion&isLike=${!isLiked}&isDislike=${!isLiked ? false : isDisliked}&articleId=${article.articleId}&owner=${article.owner}" />
+        <c:set var="dislikeArticleAction" value="ProcessServlet?action=makeEmotion&&isDislike=${!isDisliked}&isLike=${!isDisliked ? false : isLiked}&articleId=${article.articleId}&owner=${article.owner}" />
         <nav class="navbar navbar-expand-lg bg-info">
             <div class="container">
                 <div class="navbar-translate">
@@ -98,6 +98,7 @@
                 <h4>Để lại bình luận của bạn</h4>
                 <textarea name="comment" value="" rows="3" style="width: 100%" required ></textarea>
                 <input type="hidden" name="articleId" value="${article.articleId}" />
+                <input type="hidden" name="owner" value="${article.owner}" />
                 <button class="btn btn-default" name="action" value="postComment">Bình luận</button>
             </form>
             <div class="list">
