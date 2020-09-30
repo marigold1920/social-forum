@@ -302,3 +302,7 @@ span {
     font-weight: 400;
     color: #00f800;
 }
+
+.bottom-line {
+    border-bottom: 1px solid #494958;
+}

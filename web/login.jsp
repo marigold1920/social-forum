@@ -14,6 +14,11 @@
         <title>Social Forum</title>
     </head>
     <body class="landing-page">
+                <c:set var="user" value="${sessionScope.USER}" />
+
+        <c:if test="${not empty user}">
+            <c:redirect url="index.jsp" />
+        </c:if>
         <c:set var="errorMessage" value="${requestScope.errorMessage}" />
         <c:set var="errorObj" value="${requestScope.errorObj}" />
         <c:set var="isSuccess" value="${requestScope.isSuccess}" />

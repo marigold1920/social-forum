@@ -20,7 +20,7 @@ public class CommentDAO implements Serializable {
         try {
             manager.getTransaction().begin();
             comments = manager.createQuery("SELECT new app.dto.CommentDTO(c.commentId, c.account.name, c.account.email, c.comment, c.datePosted)"
-                    + " FROM Comment c WHERE c.article.articleId = :articleId ORDER BY c.datePosted DESC")
+                    + " FROM Comment c WHERE c.article.articleId = :articleId ORDER BY c.datePosted DESC, c.commentId DESC")
                     .setParameter("articleId", articleId)
                     .getResultList();
             manager.getTransaction().commit();

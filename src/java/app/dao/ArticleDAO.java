@@ -42,7 +42,7 @@ public class ArticleDAO implements Serializable {
         try {
             manager.getTransaction().begin();
             Query query = manager.createQuery("SELECT new app.dto.ArticleDTO(a.articleId, a.title, a.description, a.image, a.publishedDate)"
-                    + " FROM Article a WHERE a.status.isDefault = true AND a.content LIKE CONCAT('%', :keyword,'%') ORDER BY a.publishedDate DESC");
+                    + " FROM Article a WHERE a.status.isDefault = true AND a.content LIKE CONCAT('%', :keyword,'%') ORDER BY a.publishedDate DESC, a.articleId DESC");
             query.setFirstResult((pageNumber - 1) * Constant.PAGE_SIZE);
             query.setMaxResults(Constant.PAGE_SIZE);
             query.setParameter("keyword", keyword);

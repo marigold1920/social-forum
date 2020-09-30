@@ -32,7 +32,7 @@ public class CommentServlet extends HttpServlet {
         if (!user.getEmail().equals(owner)) {
             notificationDAO.saveNotification(
                     Notification.builder()
-                            .content(user.getName() + Constant.COMMENT_NOTIFICATION)
+                            .content(String.format("%s%s\n%s", user.getName(), Constant.COMMENT_NOTIFICATION, comment))
                             .owner(user)
                             .article(article)
                             .isRead(false)
